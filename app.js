@@ -2,13 +2,17 @@ const express = require('express');
 const app = express();
 const https = require('https');
 const bodyParse = require('body-parser');
+const path = require("path");
+
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
+
+const apiKey = process.env.API_KEY;
 
 app.use(bodyParse.urlencoded({extends:true}));
 
 app.get("/",function(req,res){
-
     res.sendFile(__dirname+"/index.html");
-
     //res.send("No Data Available!");
 });
 
@@ -18,8 +22,10 @@ app.post("/",function(req,res){
     var city = req.body.city;
     const state = req.body.state;
     const country = req.body.country;
-    const apiKey = "efdd1e7c3361e11fcd22b76dbcae441a";
+    // const apiKey = "efdd1e7c3361e11fcd22b76dbcae441a";
     const url = "https://api.openweathermap.org/data/2.5/weather?q="+city+","+state+","+country+"&APPID="+apiKey+"&units=metric";
+    console.log(url);
+    
 
     https.get(url,function(response){
         //console.log(response);
@@ -52,6 +58,6 @@ app.post("/",function(req,res){
 
 });
 
-app.listen(3000,function(){
-    console.log("Your server is at : localhost:3000");
+app.listen(3001,function(){
+    console.log("Your server is at : localhost:3001");
 });
