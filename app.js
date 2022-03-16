@@ -22,7 +22,6 @@ app.post("/",function(req,res){
     var city = req.body.city;
     const state = req.body.state;
     const country = req.body.country;
-    // const apiKey = "efdd1e7c3361e11fcd22b76dbcae441a";
     const url = "https://api.openweathermap.org/data/2.5/weather?q="+city+","+state+","+country+"&APPID="+apiKey+"&units=metric";
     console.log(url);
     
